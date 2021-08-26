@@ -1,5 +1,10 @@
 #pragma once
 
-double add(double a, double b);
+struct Params {
+    size_t batchSizeMB = 100;
+    size_t totalGB = 3;
+    size_t nIterations = 5;
+    bool verbose = false;
+};
 
-void oversubscribeTest(size_t nMBperBatch, size_t totalGB, bool verbose);
+void oversubscribeTest(Params params);

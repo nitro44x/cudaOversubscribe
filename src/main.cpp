@@ -6,23 +6,30 @@
 int main(int argc, char **argv) {
     CLI::App app{"CUDA GPU oversubscription demo"};
 
-    size_t batchSizeMB = 100;
-    app.add_option("-s,--size,size", batchSizeMB, "Batch size [MB]")
-        ->default_val(batchSizeMB);
+    Params params;
+    app.add_option("-s,--size,size", params.batchSizeMB, "Batch size [MB]")
+        ->default_val(params.batchSizeMB);
 
-    size_t totalGB = 3;
-    app.add_option("-t,--total,total", totalGB,
+    app.add_option("-t,--total,total", params.totalGB,
                    "Total amount of memory to allocate [GB]")
-        ->default_val(totalGB);
+        ->default_val(params.totalGB);
 
-    auto verbose = app.add_flag("-v,--verbose");
+    app.add_option("-n,--iterations,iterations", params.nIterations,
+                   "Number of iterations to operate on the dataset")
+        ->default_val(params.nIterations);
+
+    auto verbose = app.add_flag("-v,--verbose", params.verbose);
 
     CLI11_PARSE(app, argc, argv);
 
-    std::cout << "Batch Size [MB]: " << batchSizeMB << std::endl;
-    std::cout << "Total Size [GB]: " << totalGB << std::endl;
+    std::cout << std::endl;
+    std::cout << "Batch Size [MB]: " << params.batchSizeMB << std::endl;
+    std::cout << "Total Size [GB]: " << params.totalGB << std::endl;
+    std::cout << "Iterations: " << params.totalGB << std::endl;
+    std::cout << "Verbose: " << params.verbose << std::endl;
+    std::cout << std::endl;
 
-    oversubscribeTest(batchSizeMB, totalGB, verbose->count());
+    oversubscribeTest(params);
 
     return 0;
 }

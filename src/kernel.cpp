@@ -72,9 +72,10 @@ template <typename T> __global__ void setArray(T *a, T value, size_t N) {
     }
 }
 
-void oversubscribeTest(size_t nMBperBatch, size_t totalGB, bool verbose) {
+void oversubscribeTest(Params params) {
 
-    const size_t nElements = nMBperBatch / (sizeof(double) / 1024.0 / 1024.0);
+    const size_t nElements =
+        params.batchSizeMB / (sizeof(double) / 1024.0 / 1024.0);
 
     Array<double> out(nElements, 0.0);
     std::list<Array<double>> arrays;
@@ -86,17 +87,16 @@ void oversubscribeTest(size_t nMBperBatch, size_t totalGB, bool verbose) {
         auto &a = arrays.front();
         currentGB += a.nBytes() / (1024.0 * 1024.0 * 1024.0);
         // setArray<<<256, 256>>>(a.data(), counter++, a.size());
-    } while (currentGB < totalGB);
+    } while (currentGB < params.totalGB);
 
     std::cout << arrays.size() << " arrays :: " << currentGB << " GB"
               << std::endl;
-    const size_t nRuns = 10;
-    for (size_t run = 0; run < nRuns; ++run) {
+    for (size_t run = 0; run < params.nIterations; ++run) {
         for (auto const &arr : arrays) {
             addArray<<<256, 256>>>(arr.data(), out.data(), out.size());
         }
         cudaDeviceSynchronize();
-        if (verbose)
+        if (params.verbose)
             std::cout << arrays.size() << " arrays :: " << currentGB
                       << " GB :: sum = " << *out.data() << std::endl;
         // out.setValue(0.0);
