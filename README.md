@@ -1,13 +1,18 @@
 # cudaOversubscribe
 
-A very basic cli app to demonstrate gpu oversubscription.
+A very basic cli app to demonstrate nVidia's oversubscription capability. Oversubscription
+is only implemented for Linux. Windows drivers need to be put in TCC mode (untested) for it
+to work.
+
+See nVidia's documentation for more information ([link](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#um-oversubscription))
 
 # Building and running the demo
 
 Dependencies:
 
-* C++ 11 compiler (gcc-11 tested)
+* C++ 11 compiler (gcc-11 and VS2019 tested)
 * nvcc (CUDA 11.4 tested)
+* Graphics card with CUDA capability >= 6.x
 
 Run the following commands:
 
@@ -24,8 +29,8 @@ Run the following commands:
 
 ## 5 GB (no oversubscription)
 
-Notice the Total Size of Host To Device is approximatly 5 GB, so the memory was transfered to the device
-only once and there were not device to host tranfers. 
+Notice the Total Size of Host To Device is approximately 5 GB, so the memory was transfered to the device
+only once and there were not device to host transfers. 
 
 Also, the addArray kernel had a range of runtimes of 897us - 42ms.
 
@@ -63,9 +68,9 @@ Also, the addArray kernel had a range of runtimes of 897us - 42ms.
 
 When attempting to operate on 20 GB of data (-t 20 cli option), the volume of data transfered to the 
 device jumped to 202 GB and device to host jumped to 192 GB. This number matches the number of times
-the experiment is run (10 times), so this equates to transfering all of the data once per iteration.
+the experiment is run (10 times), so this equates to transferring all of the data once per iteration.
 
-The runtimes of addArray reflect this increased volumn memory transfers with a range
+The runtimes of addArray reflect this increased volume memory transfers with a range
 of 21ms - 61ms. Note that the batch size is the same, so the runtime of addArray is a 1:1
 comparison.
 

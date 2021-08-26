@@ -7,6 +7,24 @@
 
 #include <cuda_runtime.h>
 
+namespace kernels {
+template <typename T> __global__ void addArray(T const *a, T *out, size_t N) {
+    int tid = threadIdx.x + blockIdx.x * blockDim.x;
+    while (tid < N) {
+        out[tid] += a[tid];
+        tid += blockDim.x * gridDim.x;
+    }
+}
+
+template <typename T> __global__ void setArray(T *a, T value, size_t N) {
+    int tid = threadIdx.x + blockIdx.x * blockDim.x;
+    while (tid < N) {
+        a[tid] = value;
+        tid += blockDim.x * gridDim.x;
+    }
+}
+} // namespace kernels
+
 template <typename T>
 using deleted_unique_ptr = std::unique_ptr<T[], std::function<void(T *)>>;
 
@@ -22,8 +40,7 @@ public:
     Array(size_t nElements, T value) : Array(nElements) { setValue(value); }
 
     void setValue(T value) {
-        for (size_t i = 0; i < m_size; ++i)
-            m_data[i] = value;
+        kernels::setArray<<<256, 256>>>(data(), value, size());
     }
 
     Array(Array const &) = delete;
@@ -44,6 +61,11 @@ public:
         return *this;
     }
 
+    Array& operator+=(Array<T> const& rhs) {
+        kernels::addArray<<<256, 256>>>(rhs.data(), data(), size());
+        return *this;
+    }
+
     size_t nBytes() const { return m_size * sizeof(T); }
 
     size_t size() const { return m_size; }
@@ -55,23 +77,6 @@ private:
     deleted_unique_ptr<T> m_data = nullptr;
     size_t m_size = 0;
 };
-
-template <typename T> __global__ void addArray(T const *a, T *out, size_t N) {
-    int tid = threadIdx.x + blockIdx.x * blockDim.x;
-    while (tid < N) {
-        out[tid] += a[tid];
-        tid += blockDim.x * gridDim.x;
-    }
-}
-
-template <typename T> __global__ void setArray(T *a, T value, size_t N) {
-    int tid = threadIdx.x + blockIdx.x * blockDim.x;
-    while (tid < N) {
-        a[tid] = value;
-        tid += blockDim.x * gridDim.x;
-    }
-}
-
 void oversubscribeTest(Params params) {
 
     const size_t nElements =
@@ -86,23 +91,20 @@ void oversubscribeTest(Params params) {
         arrays.emplace_front(nElements, counter++);
         auto &a = arrays.front();
         currentGB += a.nBytes() / (1024.0 * 1024.0 * 1024.0);
-        // setArray<<<256, 256>>>(a.data(), counter++, a.size());
     } while (currentGB < params.totalGB);
 
     std::cout << arrays.size() << " arrays :: " << currentGB << " GB"
               << std::endl;
+
     for (size_t run = 0; run < params.nIterations; ++run) {
-        for (auto const &arr : arrays) {
-            addArray<<<256, 256>>>(arr.data(), out.data(), out.size());
-        }
+
+        for (auto const &arr : arrays)
+            out += arr;
+
         cudaDeviceSynchronize();
         if (params.verbose)
-            std::cout << arrays.size() << " arrays :: " << currentGB
-                      << " GB :: sum = " << *out.data() << std::endl;
-        // out.setValue(0.0);
-        setArray<<<256, 256>>>(out.data(), 0.0, out.size());
-    }
+            std::cout << run << ": sum = " << *out.data() << std::endl;
 
-    // char c;
-    // std::cin >> c;
+        out.setValue(0.0);
+    }
 }

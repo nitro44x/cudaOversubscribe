@@ -12,6 +12,8 @@ set(cuda_srcs
     src/kernel.cpp 
 )
 
+set(docs README.md)
+
 set_property(SOURCE ${cuda_srcs} PROPERTY LANGUAGE CUDA)
 
-add_executable(oversub ${srcs} ${cuda_srcs})
+add_executable(oversub ${srcs} ${cuda_srcs} ${docs})

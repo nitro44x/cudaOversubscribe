@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
     std::cout << std::endl;
     std::cout << "Batch Size [MB]: " << params.batchSizeMB << std::endl;
     std::cout << "Total Size [GB]: " << params.totalGB << std::endl;
-    std::cout << "Iterations: " << params.totalGB << std::endl;
+    std::cout << "Iterations: " << params.nIterations << std::endl;
     std::cout << "Verbose: " << params.verbose << std::endl;
     std::cout << std::endl;
 
