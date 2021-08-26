@@ -38,8 +38,8 @@ Also, the addArray kernel had a range of runtimes of 897us - 42ms.
     ==485180== Profiling application: ./oversub -t 5
     ==485180== Profiling result:
                 Type  Time(%)      Time     Calls       Avg       Min       Max  Name
-    GPU activities:   99.82%  1.70004s       520  3.2693ms  897.13us  42.015ms  void addArray<double>(double const *, double*, unsigned long)
-                        0.18%  3.0576ms        10  305.76us  298.40us  312.26us  void setArray<double>(double*, double, unsigned long)
+    GPU activities:   99.82%  1.70004s       520  3.2693ms  897.13us  42.015ms  void addArray<dou...
+                        0.18%  3.0576ms        10  305.76us  298.40us  312.26us  void setArray<do...
         API calls:   79.56%  1.70138s        10  170.14ms  47.169ms  1.27568s  cudaDeviceSynchronize
                     12.13%  259.33ms        53  4.8930ms  62.267us  255.74ms  cudaMallocManaged
                         8.19%  175.13ms        53  3.3043ms  3.2676ms  3.6595ms  cudaFree
@@ -78,8 +78,8 @@ comparison.
     ==485501== Profiling application: ./oversub -t 20
     ==485501== Profiling result:
                 Type  Time(%)      Time     Calls       Avg       Min       Max  Name
-    GPU activities:  100.00%  63.3508s      2050  30.903ms  21.757ms  61.107ms  void addArray<double>(double const *, double*, unsigned long)
-                        0.00%  3.0349ms        10  303.49us  299.14us  310.75us  void setArray<double>(double*, double, unsigned long)
+    GPU activities:  100.00%  63.3508s      2050  30.903ms  21.757ms  61.107ms  void addArray<dou...
+                        0.00%  3.0349ms        10  303.49us  299.14us  310.75us  void setArray<do...
         API calls:   98.58%  63.3473s        10  6.33473s  6.06840s  6.37734s  cudaDeviceSynchronize
                         0.95%  613.53ms       206  2.9783ms  2.5939ms  3.3228ms  cudaFree
                         0.45%  290.90ms       206  1.4121ms  63.998us  271.95ms  cudaMallocManaged
