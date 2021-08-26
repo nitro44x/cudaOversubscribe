@@ -101,10 +101,21 @@ void oversubscribeTest(Params params) {
         for (auto const &arr : arrays)
             out += arr;
 
-        cudaDeviceSynchronize();
+        auto const err = cudaDeviceSynchronize();
+        if (err != cudaSuccess) {
+            std::cerr << "CUDA error occurred (" << err
+                      << "): " << cudaGetErrorString(err) << std::endl;
+            return;
+        }
         if (params.verbose)
             std::cout << run << ": sum = " << *out.data() << std::endl;
 
         out.setValue(0.0);
+    }
+
+    auto const err = cudaDeviceSynchronize();
+    if (err != cudaSuccess) {
+        std::cerr << "CUDA error occurred (" << err
+                  << "): " << cudaGetErrorString(err) << std::endl;
     }
 }
