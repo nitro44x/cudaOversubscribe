@@ -7,18 +7,6 @@
 
 #include <cuda_runtime.h>
 
-__global__ void add(double a, double b, double *c) { *c = a + b; }
-
-double add(double a, double b) {
-    double *c = nullptr;
-    cudaMallocManaged((void **)&c, sizeof(double));
-    add<<<1, 1>>>(a, b, c);
-    cudaDeviceSynchronize();
-    double out = *c;
-    cudaFree(c);
-    return out;
-}
-
 template <typename T>
 using deleted_unique_ptr = std::unique_ptr<T[], std::function<void(T *)>>;
 
@@ -84,7 +72,7 @@ template <typename T> __global__ void setArray(T *a, T value, size_t N) {
     }
 }
 
-void oversubscribeTest(size_t nMBperBatch, size_t totalGB) {
+void oversubscribeTest(size_t nMBperBatch, size_t totalGB, bool verbose) {
 
     const size_t nElements = nMBperBatch / (sizeof(double) / 1024.0 / 1024.0);
 
@@ -108,8 +96,9 @@ void oversubscribeTest(size_t nMBperBatch, size_t totalGB) {
             addArray<<<256, 256>>>(arr.data(), out.data(), out.size());
         }
         cudaDeviceSynchronize();
-        std::cout << arrays.size() << " arrays :: " << currentGB
-                  << " GB :: sum = " << *out.data() << std::endl;
+        if (verbose)
+            std::cout << arrays.size() << " arrays :: " << currentGB
+                      << " GB :: sum = " << *out.data() << std::endl;
         // out.setValue(0.0);
         setArray<<<256, 256>>>(out.data(), 0.0, out.size());
     }
