@@ -1,5 +1,6 @@
-#include "CLI11.hpp"
-#include "kernel.hpp"
+#include <CLI11.hpp>
+
+#include "oversubTest.hpp"
 
 #include <iostream>
 
@@ -29,7 +30,7 @@ int main(int argc, char **argv) {
     std::cout << "Verbose: " << params.verbose << std::endl;
     std::cout << std::endl;
 
-    oversubscribeTest(params);
+    testDriver::oversubscribeTest(params);
 
     return 0;
 }

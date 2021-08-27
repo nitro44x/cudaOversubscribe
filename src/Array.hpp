@@ -1,8 +1,6 @@
-#include "kernel.hpp"
+#pragma once
 
 #include <functional>
-#include <iostream>
-#include <list>
 #include <memory>
 
 #include <cuda_runtime.h>
@@ -28,17 +26,37 @@ template <typename T> __global__ void setArray(T *a, T value, size_t N) {
 template <typename T>
 using deleted_unique_ptr = std::unique_ptr<T[], std::function<void(T *)>>;
 
+/**
+ * @brief Basic array class to handle CUDA memory management.
+ *
+ * @tparam T element type of the array, must be a numeric type.
+ */
 template <typename T> class Array {
 public:
     Array() = default;
+
+    /**
+     * @brief Construct a new Array object
+     *
+     * @param nElements number of elements to allocate.
+     */
     Array(size_t nElements) : m_size(nElements) {
         void *tmp = nullptr;
         cudaMallocManaged(&tmp, sizeof(T) * nElements);
         m_data = deleted_unique_ptr<T>(reinterpret_cast<T *>(tmp), cudaFree);
     }
 
+    /**
+     * @brief Construct a new Array object
+     *
+     * @param nElements number of elements to allocate
+     * @param value Value to initialize each element too.
+     */
     Array(size_t nElements, T value) : Array(nElements) { setValue(value); }
 
+    /**
+     * @brief Set the value of each element in the array
+     */
     void setValue(T value) {
         kernels::setArray<<<256, 256>>>(data(), value, size());
     }
@@ -61,13 +79,25 @@ public:
         return *this;
     }
 
-    Array& operator+=(Array<T> const& rhs) {
+    /**
+     * @brief Inplace += executed on the GPU
+     *
+     * @param rhs Array to add into the current array
+     * @return Array& The inplace array
+     */
+    Array &operator+=(Array<T> const &rhs) {
         kernels::addArray<<<256, 256>>>(rhs.data(), data(), size());
         return *this;
     }
 
+    /**
+     * @brief Number of bytes used by this array
+     */
     size_t nBytes() const { return m_size * sizeof(T); }
 
+    /**
+     * @brief Number of elements in the array
+     */
     size_t size() const { return m_size; }
 
     T *data() { return m_data.get(); }
@@ -77,45 +107,3 @@ private:
     deleted_unique_ptr<T> m_data = nullptr;
     size_t m_size = 0;
 };
-void oversubscribeTest(Params params) {
-
-    const size_t nElements =
-        params.batchSizeMB / (sizeof(double) / 1024.0 / 1024.0);
-
-    Array<double> out(nElements, 0.0);
-    std::list<Array<double>> arrays;
-    double currentGB = 0;
-
-    double counter = 0;
-    do {
-        arrays.emplace_front(nElements, counter++);
-        auto &a = arrays.front();
-        currentGB += a.nBytes() / (1024.0 * 1024.0 * 1024.0);
-    } while (currentGB < params.totalGB);
-
-    std::cout << arrays.size() << " arrays :: " << currentGB << " GB"
-              << std::endl;
-
-    for (size_t run = 0; run < params.nIterations; ++run) {
-
-        for (auto const &arr : arrays)
-            out += arr;
-
-        auto const err = cudaDeviceSynchronize();
-        if (err != cudaSuccess) {
-            std::cerr << "CUDA error occurred (" << err
-                      << "): " << cudaGetErrorString(err) << std::endl;
-            return;
-        }
-        if (params.verbose)
-            std::cout << run << ": sum = " << *out.data() << std::endl;
-
-        out.setValue(0.0);
-    }
-
-    auto const err = cudaDeviceSynchronize();
-    if (err != cudaSuccess) {
-        std::cerr << "CUDA error occurred (" << err
-                  << "): " << cudaGetErrorString(err) << std::endl;
-    }
-}
