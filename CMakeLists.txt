@@ -29,6 +29,7 @@ if(BUILD_DOCS)
     find_package(Doxygen)
 
     set(DOXYGEN_USE_MDFILE_AS_MAINPAGE README.md)
+    set(DOXYGEN_HTML_EXTRA_STYLESHEET docs/doxygen-awesome.css)
 
     doxygen_add_docs(
         doxygen
