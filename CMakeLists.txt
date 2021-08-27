@@ -29,7 +29,14 @@ if(BUILD_DOCS)
     find_package(Doxygen)
 
     set(DOXYGEN_USE_MDFILE_AS_MAINPAGE README.md)
-    set(DOXYGEN_HTML_EXTRA_STYLESHEET docs/doxygen-awesome.css)
+    set(DOXYGEN_HTML_EXTRA_STYLESHEET docs/doxygen-awesome.css 
+                                      docs/doxygen-awesome-sidebar-only.css 
+                                      docs/doxygen-awesome-sidebar-only-darkmode-toggle.css
+                                      docs/custom.css)
+    set(DOXYGEN_HTML_FOOTER docs/footer.html)
+    set(DOXYGEN_HTML_HEADER docs/header.html)
+    set(DOXYGEN_GENERATE_TREEVIEW YES)
+    set(DOXYGEN_HTML_EXTRA_FILES docs/doxygen-awesome-darkmode-toggle.js)
 
     doxygen_add_docs(
         doxygen
