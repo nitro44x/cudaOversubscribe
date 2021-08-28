@@ -2,8 +2,6 @@
 
 Github Actions: [![CMake](https://github.com/nitro44x/cudaOversubscribe/actions/workflows/cmake.yml/badge.svg)](https://github.com/nitro44x/cudaOversubscribe/actions/workflows/cmake.yml)
 
-[Documentation](https://nitro44x.github.io/cudaOversubscribe/)
-
 A very basic cli app to demonstrate nVidia's oversubscription capability. Oversubscription
 is only implemented for Linux. Windows drivers need to be put in TCC mode (untested) for it
 to work.

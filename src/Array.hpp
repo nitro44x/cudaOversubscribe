@@ -1,3 +1,8 @@
+/**
+ * @file Array.hpp
+ * @brief Basic array class to handle CUDA memory management.
+ */
+
 #pragma once
 
 #include "kernels.hpp"
@@ -17,14 +22,14 @@ using deleted_unique_ptr = std::unique_ptr<T[], std::function<void(T *)>>;
  */
 template <typename T> class Array {
 public:
-    Array() = default;
+    explicit Array() = default;
 
     /**
      * @brief Construct a new Array object
      *
      * @param nElements number of elements to allocate.
      */
-    Array(size_t nElements) : m_size(nElements) {
+    explicit Array(size_t nElements) : m_size(nElements) {
         void *tmp = nullptr;
         cudaMallocManaged(&tmp, sizeof(T) * nElements);
         m_data = deleted_unique_ptr<T>(reinterpret_cast<T *>(tmp), cudaFree);
@@ -36,7 +41,9 @@ public:
      * @param nElements number of elements to allocate
      * @param value Value to initialize each element too.
      */
-    Array(size_t nElements, T value) : Array(nElements) { setValue(value); }
+    explicit Array(size_t nElements, T value) : Array(nElements) {
+        setValue(value);
+    }
 
     /**
      * @brief Set the value of each element in the array
