@@ -19,10 +19,13 @@ set(srcs
     src/main.cpp
     src/oversubTest.hpp
     src/Array.hpp
+    src/kernels.hpp
 )
 
 set(cuda_srcs 
     src/oversubTest.cpp 
+    src/Array.cpp
+    src/kernels.cpp
 )
 
 set(docs README.md)
