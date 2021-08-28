@@ -64,11 +64,17 @@ public:
     Array(Array const &) = delete;
     Array &operator=(Array const &) = delete;
 
+    /**
+     * @brief Copy constructor.
+     */
     Array(Array &&other)
         : m_data(std::move(other.m_data)), m_size(other.m_size) {
         other.m_size = 0;
     }
 
+    /**
+     * @brief Copy assign operator.
+     */
     Array &operator=(Array &&rhs) {
         if (this == &rhs)
             return *this;
@@ -100,7 +106,14 @@ public:
      */
     size_t size() const { return m_size; }
 
+    /**
+     * @brief Get underlying data pointer.
+     */
     T *data() { return m_data.get(); }
+
+    /**
+     * @brief Get underlying const data pointer.
+     */
     T const *data() const { return m_data.get(); }
 
 private:
