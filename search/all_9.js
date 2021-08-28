@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['testdriver_15',['testDriver',['../structtestDriver.html',1,'']]],
-  ['totalgb_16',['totalGB',['../structParams.html#a78275acf3ebaff67a46841f3ea9cfded',1,'Params']]]
+  ['setarray_15',['setArray',['../kernels_8hpp.html#ab9f1022b8222117a6eb3b52dae4125c2',1,'kernels']]],
+  ['setvalue_16',['setValue',['../classArray.html#adeccd194579d7489b08fcf22b24ea719',1,'Array']]],
+  ['size_17',['size',['../classArray.html#a6d8635dbcfd35c8132596084d072f7d4',1,'Array']]]
 ];
