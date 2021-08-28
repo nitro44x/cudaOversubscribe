@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>oversub: src Directory Reference</title>
+<title>oversub: src/kernels.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -72,7 +72,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('dir_68267d1309a1af8e8297ef4c3efbcdba.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('kernels_8hpp.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -91,24 +91,144 @@ $(document).ready(function(){initNavTree('dir_68267d1309a1af8e8297ef4c3efbcdba.h
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">src Directory Reference</div>  </div>
+<div class="title">kernels.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Simple helper kernels.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;cuda_runtime.h&gt;</code><br />
+</div>
+<p><a href="kernels_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
-Files</h2></td></tr>
-<tr class="memitem:kernels_8hpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kernels_8hpp.html">kernels.hpp</a> <a href="kernels_8hpp_source.html">[code]</a></td></tr>
-<tr class="memdesc:kernels_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple helper kernels. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a981cde385e9888d808d0923700f19992"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a981cde385e9888d808d0923700f19992"><td class="memTemplItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="kernels_8hpp.html#a981cde385e9888d808d0923700f19992">kernels::addArray</a> (T const *a, T *out, size_t N)</td></tr>
+<tr class="memdesc:a981cde385e9888d808d0923700f19992"><td class="mdescLeft">&#160;</td><td class="mdescRight">CUDA kernel that performs an inplace add.  <a href="kernels_8hpp.html#a981cde385e9888d808d0923700f19992">More...</a><br /></td></tr>
+<tr class="separator:a981cde385e9888d808d0923700f19992"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9f1022b8222117a6eb3b52dae4125c2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ab9f1022b8222117a6eb3b52dae4125c2"><td class="memTemplItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="kernels_8hpp.html#ab9f1022b8222117a6eb3b52dae4125c2">kernels::setArray</a> (T *a, T value, size_t N)</td></tr>
+<tr class="memdesc:ab9f1022b8222117a6eb3b52dae4125c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">CUDA kernel that sets an entire array to a single value.  <a href="kernels_8hpp.html#ab9f1022b8222117a6eb3b52dae4125c2">More...</a><br /></td></tr>
+<tr class="separator:ab9f1022b8222117a6eb3b52dae4125c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Simple helper kernels. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a981cde385e9888d808d0923700f19992"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a981cde385e9888d808d0923700f19992">&#9670;&nbsp;</a></span>addArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">__global__ void kernels::addArray </td>
+          <td>(</td>
+          <td class="paramtype">T const *&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>N</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>CUDA kernel that performs an inplace add. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>data type (must support +) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>array to add </td></tr>
+    <tr><td class="paramname">out</td><td>array the inplace addition is performed on </td></tr>
+    <tr><td class="paramname">N</td><td>size of a and out </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab9f1022b8222117a6eb3b52dae4125c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9f1022b8222117a6eb3b52dae4125c2">&#9670;&nbsp;</a></span>setArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">__global__ void kernels::setArray </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>N</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>CUDA kernel that sets an entire array to a single value. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>data type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>array to be set </td></tr>
+    <tr><td class="paramname">value</td><td>the value to set the array too </td></tr>
+    <tr><td class="paramname">N</td><td>size of the array </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="kernels_8hpp.html">kernels.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.17 </li>
   </ul>
 </div>

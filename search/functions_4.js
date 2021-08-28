@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['setvalue_24',['setValue',['../classArray.html#adeccd194579d7489b08fcf22b24ea719',1,'Array']]],
-  ['size_25',['size',['../classArray.html#a6d8635dbcfd35c8132596084d072f7d4',1,'Array']]]
+  ['setarray_29',['setArray',['../kernels_8hpp.html#ab9f1022b8222117a6eb3b52dae4125c2',1,'kernels']]],
+  ['setvalue_30',['setValue',['../classArray.html#adeccd194579d7489b08fcf22b24ea719',1,'Array']]],
+  ['size_31',['size',['../classArray.html#a6d8635dbcfd35c8132596084d072f7d4',1,'Array']]]
 ];
