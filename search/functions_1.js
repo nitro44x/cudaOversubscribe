@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nbytes_17',['nBytes',['../classArray.html#a3695fccafcb2d3c17a7d7c682f2652cd',1,'Array']]]
+  ['data_19',['data',['../classArray.html#ac20792be35035ae1e65cb288007a29d9',1,'Array::data()'],['../classArray.html#aae8b12089933c90cfad8deecd5ce4f5d',1,'Array::data() const']]]
 ];

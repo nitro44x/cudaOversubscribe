@@ -136,51 +136,56 @@ $(document).ready(function(){initNavTree('Array_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classArray.html#a2a8aef04bcc768812f00ba92e3aa5297">   55</a></span>&#160;    <a class="code" href="classArray.html#a2a8aef04bcc768812f00ba92e3aa5297">Array</a>(<span class="keywordtype">size_t</span> nElements, T value) : <a class="code" href="classArray.html">Array</a>(nElements) { <a class="code" href="classArray.html#adeccd194579d7489b08fcf22b24ea719">setValue</a>(value); }</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classArray.html#adeccd194579d7489b08fcf22b24ea719">   60</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classArray.html#adeccd194579d7489b08fcf22b24ea719">setValue</a>(T value) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        kernels::setArray&lt;&lt;&lt;256, 256&gt;&gt;&gt;(data(), value, <a class="code" href="classArray.html#a6d8635dbcfd35c8132596084d072f7d4">size</a>());</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        kernels::setArray&lt;&lt;&lt;256, 256&gt;&gt;&gt;(<a class="code" href="classArray.html#ac20792be35035ae1e65cb288007a29d9">data</a>(), value, <a class="code" href="classArray.html#a6d8635dbcfd35c8132596084d072f7d4">size</a>());</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="classArray.html">Array</a>(<a class="code" href="classArray.html">Array</a> <span class="keyword">const</span> &amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="classArray.html">Array</a> &amp;operator=(<a class="code" href="classArray.html">Array</a> <span class="keyword">const</span> &amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="classArray.html">Array</a>(<a class="code" href="classArray.html">Array</a> &amp;&amp;other)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        : m_data(std::move(other.m_data)), m_size(other.m_size) {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        other.m_size = 0;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="classArray.html">Array</a> &amp;operator=(<a class="code" href="classArray.html">Array</a> &amp;&amp;rhs) {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;rhs)</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        m_data = std::move(rhs.m_data);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        m_size = rhs.m_size;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        rhs.m_size = 0;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classArray.html#ae4b6b40693b77f82f089ffa7e1683f32">   70</a></span>&#160;    <a class="code" href="classArray.html#ae4b6b40693b77f82f089ffa7e1683f32">Array</a>(<a class="code" href="classArray.html">Array</a> &amp;&amp;other)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        : m_data(std::move(other.m_data)), m_size(other.m_size) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        other.m_size = 0;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classArray.html#a0f8e1f1a5ff664889d068abf243178f9">   78</a></span>&#160;    <a class="code" href="classArray.html">Array</a> &amp;<a class="code" href="classArray.html#a0f8e1f1a5ff664889d068abf243178f9">operator=</a>(<a class="code" href="classArray.html">Array</a> &amp;&amp;rhs) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">this</span> == &amp;rhs)</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classArray.html#aa6214bac74bae1745cb7ebaf173907c5">   88</a></span>&#160;    <a class="code" href="classArray.html">Array</a> &amp;<a class="code" href="classArray.html#aa6214bac74bae1745cb7ebaf173907c5">operator+=</a>(<a class="code" href="classArray.html">Array&lt;T&gt;</a> <span class="keyword">const</span> &amp;rhs) {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        kernels::addArray&lt;&lt;&lt;256, 256&gt;&gt;&gt;(rhs.data(), data(), <a class="code" href="classArray.html#a6d8635dbcfd35c8132596084d072f7d4">size</a>());</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classArray.html#a3695fccafcb2d3c17a7d7c682f2652cd">   96</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classArray.html#a3695fccafcb2d3c17a7d7c682f2652cd">nBytes</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_size * <span class="keyword">sizeof</span>(T); }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classArray.html#a6d8635dbcfd35c8132596084d072f7d4">  101</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classArray.html#a6d8635dbcfd35c8132596084d072f7d4">size</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_size; }</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    T *data() { <span class="keywordflow">return</span> m_data.get(); }</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    T <span class="keyword">const</span> *data()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_data.get(); }</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    deleted_unique_ptr&lt;T&gt; m_data = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">size_t</span> m_size = 0;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;};</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        m_data = std::move(rhs.m_data);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        m_size = rhs.m_size;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        rhs.m_size = 0;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classArray.html#aa6214bac74bae1745cb7ebaf173907c5">   94</a></span>&#160;    <a class="code" href="classArray.html">Array</a> &amp;<a class="code" href="classArray.html#aa6214bac74bae1745cb7ebaf173907c5">operator+=</a>(<a class="code" href="classArray.html">Array&lt;T&gt;</a> <span class="keyword">const</span> &amp;rhs) {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        kernels::addArray&lt;&lt;&lt;256, 256&gt;&gt;&gt;(rhs.<a class="code" href="classArray.html#ac20792be35035ae1e65cb288007a29d9">data</a>(), <a class="code" href="classArray.html#ac20792be35035ae1e65cb288007a29d9">data</a>(), <a class="code" href="classArray.html#a6d8635dbcfd35c8132596084d072f7d4">size</a>());</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="classArray.html#a3695fccafcb2d3c17a7d7c682f2652cd">  102</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classArray.html#a3695fccafcb2d3c17a7d7c682f2652cd">nBytes</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_size * <span class="keyword">sizeof</span>(T); }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="classArray.html#a6d8635dbcfd35c8132596084d072f7d4">  107</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classArray.html#a6d8635dbcfd35c8132596084d072f7d4">size</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_size; }</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classArray.html#ac20792be35035ae1e65cb288007a29d9">  112</a></span>&#160;    T *<a class="code" href="classArray.html#ac20792be35035ae1e65cb288007a29d9">data</a>() { <span class="keywordflow">return</span> m_data.get(); }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classArray.html#aae8b12089933c90cfad8deecd5ce4f5d">  117</a></span>&#160;    T <span class="keyword">const</span> *<a class="code" href="classArray.html#aae8b12089933c90cfad8deecd5ce4f5d">data</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_data.get(); }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    deleted_unique_ptr&lt;T&gt; m_data = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordtype">size_t</span> m_size = 0;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassArray_html_a3695fccafcb2d3c17a7d7c682f2652cd"><div class="ttname"><a href="classArray.html#a3695fccafcb2d3c17a7d7c682f2652cd">Array::nBytes</a></div><div class="ttdeci">size_t nBytes() const</div><div class="ttdoc">Number of bytes used by this array.</div><div class="ttdef"><b>Definition:</b> Array.hpp:96</div></div>
+<div class="ttc" id="aclassArray_html_a0f8e1f1a5ff664889d068abf243178f9"><div class="ttname"><a href="classArray.html#a0f8e1f1a5ff664889d068abf243178f9">Array::operator=</a></div><div class="ttdeci">Array &amp; operator=(Array &amp;&amp;rhs)</div><div class="ttdoc">Copy assign operator.</div><div class="ttdef"><b>Definition:</b> Array.hpp:78</div></div>
+<div class="ttc" id="aclassArray_html_a3695fccafcb2d3c17a7d7c682f2652cd"><div class="ttname"><a href="classArray.html#a3695fccafcb2d3c17a7d7c682f2652cd">Array::nBytes</a></div><div class="ttdeci">size_t nBytes() const</div><div class="ttdoc">Number of bytes used by this array.</div><div class="ttdef"><b>Definition:</b> Array.hpp:102</div></div>
+<div class="ttc" id="aclassArray_html_aae8b12089933c90cfad8deecd5ce4f5d"><div class="ttname"><a href="classArray.html#aae8b12089933c90cfad8deecd5ce4f5d">Array::data</a></div><div class="ttdeci">const T * data() const</div><div class="ttdoc">Get underlying const data pointer.</div><div class="ttdef"><b>Definition:</b> Array.hpp:117</div></div>
+<div class="ttc" id="aclassArray_html_ac20792be35035ae1e65cb288007a29d9"><div class="ttname"><a href="classArray.html#ac20792be35035ae1e65cb288007a29d9">Array::data</a></div><div class="ttdeci">T * data()</div><div class="ttdoc">Get underlying data pointer.</div><div class="ttdef"><b>Definition:</b> Array.hpp:112</div></div>
 <div class="ttc" id="aclassArray_html_a2a8aef04bcc768812f00ba92e3aa5297"><div class="ttname"><a href="classArray.html#a2a8aef04bcc768812f00ba92e3aa5297">Array::Array</a></div><div class="ttdeci">Array(size_t nElements, T value)</div><div class="ttdoc">Construct a new Array object.</div><div class="ttdef"><b>Definition:</b> Array.hpp:55</div></div>
 <div class="ttc" id="aclassArray_html_adeccd194579d7489b08fcf22b24ea719"><div class="ttname"><a href="classArray.html#adeccd194579d7489b08fcf22b24ea719">Array::setValue</a></div><div class="ttdeci">void setValue(T value)</div><div class="ttdoc">Set the value of each element in the array.</div><div class="ttdef"><b>Definition:</b> Array.hpp:60</div></div>
 <div class="ttc" id="aclassArray_html"><div class="ttname"><a href="classArray.html">Array</a></div><div class="ttdoc">Basic array class to handle CUDA memory management.</div><div class="ttdef"><b>Definition:</b> Array.hpp:34</div></div>
-<div class="ttc" id="aclassArray_html_a6d8635dbcfd35c8132596084d072f7d4"><div class="ttname"><a href="classArray.html#a6d8635dbcfd35c8132596084d072f7d4">Array::size</a></div><div class="ttdeci">size_t size() const</div><div class="ttdoc">Number of elements in the array.</div><div class="ttdef"><b>Definition:</b> Array.hpp:101</div></div>
-<div class="ttc" id="aclassArray_html_aa6214bac74bae1745cb7ebaf173907c5"><div class="ttname"><a href="classArray.html#aa6214bac74bae1745cb7ebaf173907c5">Array::operator+=</a></div><div class="ttdeci">Array &amp; operator+=(Array&lt; T &gt; const &amp;rhs)</div><div class="ttdoc">Inplace += executed on the GPU.</div><div class="ttdef"><b>Definition:</b> Array.hpp:88</div></div>
+<div class="ttc" id="aclassArray_html_a6d8635dbcfd35c8132596084d072f7d4"><div class="ttname"><a href="classArray.html#a6d8635dbcfd35c8132596084d072f7d4">Array::size</a></div><div class="ttdeci">size_t size() const</div><div class="ttdoc">Number of elements in the array.</div><div class="ttdef"><b>Definition:</b> Array.hpp:107</div></div>
+<div class="ttc" id="aclassArray_html_aa6214bac74bae1745cb7ebaf173907c5"><div class="ttname"><a href="classArray.html#aa6214bac74bae1745cb7ebaf173907c5">Array::operator+=</a></div><div class="ttdeci">Array &amp; operator+=(Array&lt; T &gt; const &amp;rhs)</div><div class="ttdoc">Inplace += executed on the GPU.</div><div class="ttdef"><b>Definition:</b> Array.hpp:94</div></div>
+<div class="ttc" id="aclassArray_html_ae4b6b40693b77f82f089ffa7e1683f32"><div class="ttname"><a href="classArray.html#ae4b6b40693b77f82f089ffa7e1683f32">Array::Array</a></div><div class="ttdeci">Array(Array &amp;&amp;other)</div><div class="ttdoc">Copy constructor.</div><div class="ttdef"><b>Definition:</b> Array.hpp:70</div></div>
 <div class="ttc" id="aclassArray_html_a8bc6368381f6cf8b57756e2243b2b1bc"><div class="ttname"><a href="classArray.html#a8bc6368381f6cf8b57756e2243b2b1bc">Array::Array</a></div><div class="ttdeci">Array(size_t nElements)</div><div class="ttdoc">Construct a new Array object.</div><div class="ttdef"><b>Definition:</b> Array.hpp:43</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
