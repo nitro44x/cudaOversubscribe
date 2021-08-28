@@ -45,6 +45,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: cuda-toolkit
+      uses: Jimver/cuda-toolkit@v0.2.4
+      with:
+        cuda: 11.2.2
+
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v1
@@ -68,7 +73,7 @@ jobs:
     #    uses a compiled language
 
     - run: |
-       cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+       cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_DOCS=OFF
        cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
     - name: Perform CodeQL Analysis
