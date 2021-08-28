@@ -42,7 +42,8 @@ if(BUILD_DOCS)
     set(DOXYGEN_HTML_EXTRA_STYLESHEET docs/doxygen-awesome.css 
                                       docs/doxygen-awesome-sidebar-only.css 
                                       docs/doxygen-awesome-sidebar-only-darkmode-toggle.css
-                                      docs/custom.css)
+                                      docs/custom.css
+                                      )
     set(DOXYGEN_HTML_FOOTER docs/footer.html)
     set(DOXYGEN_HTML_HEADER docs/header.html)
     set(DOXYGEN_GENERATE_TREEVIEW YES)
@@ -52,5 +53,18 @@ if(BUILD_DOCS)
         doxygen
         src ${docs}
         COMMENT "Generate html docs"
+    )
+endif()
+
+find_program(CLANGFORMAT clang-format)
+if(CLANGFORMAT)
+    file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.h)
+
+    add_custom_target(
+            fmt
+            COMMAND ${CLANGFORMAT}
+            -style=file
+            -i
+            ${ALL_SOURCE_FILES}
     )
 endif()

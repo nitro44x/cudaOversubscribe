@@ -1,3 +1,8 @@
+/**
+ * @file main.cpp
+ * @brief CLI driver
+ */
+
 #include <CLI11.hpp>
 
 #include "oversubTest.hpp"
@@ -19,7 +24,7 @@ int main(int argc, char **argv) {
                    "Number of iterations to operate on the dataset")
         ->default_val(params.nIterations);
 
-    auto verbose = app.add_flag("-v,--verbose", params.verbose);
+    app.add_flag("-v,--verbose", params.verbose);
 
     CLI11_PARSE(app, argc, argv);
 
