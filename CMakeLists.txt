@@ -4,6 +4,13 @@ project(oversub LANGUAGES CXX CUDA)
 
 option(BUILD_DOCS "Build documentation" ON)
 
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+    set(CMAKE_C_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+    set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+    set(CMAKE_CUDA_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+endif()
+
 set(tpl_src
     thirdparty/CLI11.hpp
 )
