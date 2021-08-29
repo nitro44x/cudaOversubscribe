@@ -58,7 +58,7 @@ endif()
 
 find_program(CLANGFORMAT clang-format)
 if(CLANGFORMAT)
-    file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.h)
+    file(GLOB_RECURSE ALL_SOURCE_FILES src/*.h src/*.hpp src/*.cpp src/*.c)
 
     add_custom_target(
             fmt
