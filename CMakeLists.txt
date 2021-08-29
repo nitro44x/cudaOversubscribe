@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20.0)
 
 project(oversub LANGUAGES CXX CUDA)
 
-option(BUILD_DOCS "Build documentation" ON)
+option(BUILD_DOCS "Build documentation" OFF)
 
 find_program(CCACHE_PROGRAM ccache)
 if(CCACHE_PROGRAM)
@@ -36,7 +36,7 @@ add_executable(oversub ${srcs} ${cuda_srcs} ${docs} ${tpl_src})
 target_include_directories(oversub PRIVATE thirdparty)
 
 if(BUILD_DOCS)
-    find_package(Doxygen)
+    find_package(Doxygen REQUIRED)
 
     set(DOXYGEN_USE_MDFILE_AS_MAINPAGE README.md)
     set(DOXYGEN_HTML_EXTRA_STYLESHEET docs/doxygen-awesome.css 
